@@ -34,7 +34,7 @@ namespace OpenGL
 
             shader = new Shader("Shader.v", "Shader.f");
 
-            mesh = MeshLoader.LoadMesh("mesh/deer.obj");
+            mesh = MeshLoader.LoadMesh("deer.obj");
 
             VertexBufferObject = GL.GenBuffer();
 
