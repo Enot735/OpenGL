@@ -71,7 +71,7 @@ namespace OpenGL
             shader.Use();
 
             // Рзмер
-            shader.SetUniform("scaleFactor", 1);
+            shader.SetUniform("scaleFactor", 1.0f);
 
             // Поворот
             var model = Matrix4.CreateRotationY(angle);
@@ -79,6 +79,11 @@ namespace OpenGL
             // Бесконечность не предел
             angle += 0.01f;
 
+            // преобразуем из проекции в перспективу - делаем нашего бесперспективного оленя перспективным
+            // поможет распараллелить процесс и уменьшить нагрузку
+            var perspective = Matrix4.CreatePerspectiveFieldOfView((float)(Math.PI / 2), (float)Width / Height, 0.1f, 100.0f);
+            shader.SetUniform("perspective", perspective);
+            
             // Функция отрисовки
             GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
 
